@@ -25,7 +25,7 @@ LLM_API_KEY = "sk-22"
 MODEL = "DSF-CUG-LLM"
 
 # Set directory
-WORKING_DIR = "/ssddata/jimmy/graphrag/Error_Product_KG"
+WORKING_DIR = "/ssddata/jimmy/graphrag/Ryan_KG"
 
 async def llm_model_if_cache(
     prompt, system_prompt=None, history_messages=[], **kwargs
@@ -60,18 +60,15 @@ async def llm_model_if_cache(
     # -----------------------------------------------------
     return response.choices[0].message.content
 
-def query():
+def query(text: str):
     rag = GraphRAG(
         working_dir=WORKING_DIR,
         best_model_func=llm_model_if_cache,
         cheap_model_func=llm_model_if_cache,
-        # embedding_func=azure_openai_embedding,
+        embedding_func=azure_openai_embedding,
     )
-    print(
-        "#########\n",
-        rag.query(
-            "CloudSE2980返回404，提示“Find User By INFO Xml C-MSISDN Failed”", param=QueryParam(mode="local")
-        )
+    return rag.query(
+        text
     )
 
 @wrap_embedding_func_with_attrs(embedding_dim=1536, max_token_size=8192)

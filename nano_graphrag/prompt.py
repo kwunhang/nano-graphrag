@@ -336,12 +336,14 @@ You are a helpful assistant responding to questions about data in the tables pro
 ---Goal---
 
 Generate a response of the target length and format that responds to the user's question, summarizing all information in the input data tables appropriate for the response length and format, and incorporating any relevant general knowledge.
+
 If you don't know the answer, just say so. Do not make anything up.
+
 Do not include information where the supporting evidence for it is not provided.
 
 ---Target response length and format---
 
-{response_type}
+请根据问题的类型，选择相应的结构，回答有关所提供表格中数据的问题。例如：告警解释, 现象描述, 日志含义, 错误码描述, 对系统的影响, 可能原因, 处理步骤, 处理方法。选择3到4个相关部分分段回答。
 
 
 ---Data tables---
@@ -357,13 +359,84 @@ If you don't know the answer, just say so. Do not make anything up.
 
 Do not include information where the supporting evidence for it is not provided.
 
-
 ---Target response length and format---
 
-{response_type}
+请根据问题的类型，选择相应的结构，回答有关所提供表格中数据的问题。例如：告警解释, 现象描述, 日志含义, 错误码描述, 对系统的影响, 可能原因, 处理步骤, 处理方法。选择3到4个相关部分分段回答。
 
-Add sections and commentary to the response as appropriate for the length and format. Style the response in markdown.
+Style the response in markdown.
 """
+
+
+# PROMPTS[
+#     "local_rag_response"
+# ] = """---Role---
+
+# You are a helpful assistant responding to questions about data in the tables provided.
+
+
+# ---Goal---
+
+# Generate a response of the target length and format that responds to the user's question, summarizing all information in the input data tables appropriate for the response length and format, and incorporating any relevant general knowledge.
+
+# If you cannot find the answer from the provided table, answer the question based on your knowledge.
+
+# ---Target response length and format---
+
+# 请根据问题的类型，选择相应的结构，回答有关所提供表格中数据的问题。例如：告警解释, 现象描述, 日志含义, 错误码描述, 对系统的影响, 可能原因, 处理步骤, 处理方法。选择3到4个相关部分以1，2，3，4分点回答,如果需要继续分点请以a: ,b: ,c: ,d: 开始。
+
+
+# ---Data tables---
+
+# {context_data}
+
+
+# ---Goal---
+
+# Generate a response of the target length and format that responds to the user's question, summarizing all information in the input data tables appropriate for the response length and format, and incorporating any relevant general knowledge.
+
+# If you cannot find the answer from the provided table, answer the question based on your knowledge.
+
+
+# ---Target response length and format---
+
+# 请根据问题的类型，选择相应的结构，回答有关所提供表格中数据的问题。例如：告警解释, 现象描述, 日志含义, 错误码描述, 对系统的影响, 可能原因, 处理步骤, 处理方法。选择3到4个相关部分以1，2，3，4分点回答,如果需要继续分点请以a: ,b: ,c: ,d: 开始。
+# """
+
+# PROMPTS[
+#     "local_rag_response"
+# ] = """---Role---
+
+# 你是一位乐于助人的助手，用户会就不同类型的问题向你询问。你负责根据问题的类型，选择相应的结构，回答有关所提供表格中数据的问题。例如：告警解释, 现象描述, 日志含义, 错误码描述, 对系统的影响, 可能原因, 处理步骤, 处理方法。
+
+
+# ---Goal---
+
+# 生成符合目标长度和格式的响应，以回答用户的问题，总结输入数据表中适合响应长度和格式的所有信息，并纳入任何相关的常识。
+
+# 如果你无法从提供的表格中找到答案，请根据你的知识回答问题。
+
+
+# ---Target response length and format---
+
+# 请根据问题的性质，选择3到4个相关部分以1，2，3，4分点回答,如果需要继续分点请以a: ,b: ,c: ,d: 开始。
+
+
+# ---Data tables---
+
+# {context_data}
+
+
+# ---Goal---
+
+# 生成符合目标长度和格式的响应，以回答用户的问题，总结输入数据表中适合响应长度和格式的所有信息，并纳入任何相关的常识。
+
+# 如果你无法从提供的表格中找到答案，请根据你的知识回答问题。
+
+
+# ---Target response length and format---
+
+# 请根据问题的性质，选择3到4个相关部分以1，2，3，4分点回答,如果需要继续分点请以a: ,b: ,c: ,d: 开始。
+# """
 
 PROMPTS[
     "global_map_rag_points"
